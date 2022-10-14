@@ -1,6 +1,12 @@
-import type { NextPage } from "next";
+// Next Components
 import Head from "next/head";
+import Link from "next/link";
+
+// ../components
 import Navbar from "../components/Navbar";
+
+// Types
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +17,7 @@ const Home: NextPage = () => {
       {/*Place a navigation bar at the top of the screen*/}
       <Navbar></Navbar>
 
-      { /* Welcome text */ }
+      {/* Welcome text */}
       <div className="justify-center text-center flex">
         <h1 className="text-2xl font-bold text-green-700">welcome to&nbsp;</h1>
         <h1 className="text-center text-2xl font-bold text-red-400 ">art</h1>
@@ -20,15 +26,14 @@ const Home: NextPage = () => {
         </h1>
       </div>
 
-      { /* Searchbar Section */ }
+      {/* Form */}
       <div className="justify-center text-white text-center">
-        <p>Please enter search term:</p>
-        <input className="text-black text-center mb-2"></input>
-        <div>
-          <button className="text-black border-r-slate-600 bg-slate-200">Search</button>
-        </div>
+        <form action="/results/" method="get">
+          <p>Please enter search term:</p>
+          <input type="text" required id="searchTerm" name="searchTerm" className="text-black text-center mb-2"></input>
+          <button type="submit" id="searchButton" className="text-black border-r-slate-600 bg-slate-200">Search</button>
+        </form>
       </div>
-
     </div>
   );
 };
