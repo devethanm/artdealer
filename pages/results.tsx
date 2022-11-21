@@ -12,6 +12,7 @@ import type { InferGetStaticPropsType } from "next";
 
 // lib
 import { getMatchingSearches, getPaintings } from "../lib/wikidata";
+import { Convert, Paintings } from "../lib/paintingsjson"
 
 export async function getServerSideProps(context: any) {
   return {
@@ -22,6 +23,14 @@ export async function getServerSideProps(context: any) {
 };
 
 const Results: NextPage = ({ paintings }: any, { matches }: any,) => {
+  let valid = true;
+  const validateJSON = (json: string) => {
+    try {
+      Convert.toPaintings(paintings);
+    } catch (error) {
+      valid = false;
+    }
+  }
 
   return (
     <div className="h-screen bg-slate-900">
@@ -33,9 +42,7 @@ const Results: NextPage = ({ paintings }: any, { matches }: any,) => {
       {/* Header text */}
       <div className="justify-center text-white text-center">
       <p>Search results:</p>
-      <p>{JSON.stringify(paintings)}</p>
-      <p>{/*JSON.stringify(matches)*/}</p>
-      <p>{/*JSON.stringify(getMatchingSearches(searchTerm))*/}</p>
+      <p>{valid ? JSON.stringify(paintings): "error"}</p>
       </div>
     </div>
   );
