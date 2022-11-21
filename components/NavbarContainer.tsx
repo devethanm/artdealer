@@ -44,7 +44,7 @@ const NavbarContainer: React.FC<{position: string}> = (props) => {
 
 { /* TODO The item prop and the types below are likely 
 very incorrect look into a better solution below */}
-const NavbarContainerItem: React.FC<any> = ({ icon }: ImageProps) => (
+const NavbarContainerItem: React.FC<any> = ({ icon }: any) => (
     <div className="navbar-container-item">
         {icon}
     </div>
