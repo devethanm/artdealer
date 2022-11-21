@@ -11,12 +11,12 @@ import type { NextPage } from "next";
 import type { InferGetStaticPropsType } from "next";
 
 // lib
-import { getMatchingSearches } from "../lib/wikidata";
+import { getMatchingSearches, getPaintings } from "../lib/wikidata";
 
 export async function getServerSideProps(context: any) {
   return {
     props: {
-      paintings: await getMatchingSearches(context.query.searchTerm)
+      paintings: await getPaintings(context.query.searchTerm)
     },
   };
 };
