@@ -5,14 +5,17 @@ import { GetStaticProps } from 'next'
 
 // ../components
 import Navbar from "../components/Navbar";
+import Artwork from "../components/Artwork";
 
 // Types
 import type { NextPage } from "next";
 import type { InferGetStaticPropsType } from "next";
+import type { Paintings, PaintingsClass } from "../lib/paintingsjson";
 
 // lib
-import { getMatchingSearches, getPaintings } from "../lib/wikidata";
-import { Convert, Paintings } from "../lib/paintingsjson"
+import { getMatchingSearches, getPaintings, parsePaintings } from "../lib/wikidata";
+import { Convert } from "../lib/paintingsjson"
+import { json } from "stream/consumers";
 
 export async function getServerSideProps(context: any) {
   return {
@@ -22,15 +25,22 @@ export async function getServerSideProps(context: any) {
   };
 };
 
-const Results: NextPage = ({ paintings }: any, { matches }: any,) => {
+const Results: NextPage<{paintings: Paintings}> = ({ paintings }) => {
   let valid = true;
   const validateJSON = (json: string) => {
     try {
-      Convert.toPaintings(paintings);
+      Convert.toPaintings(JSON.stringify(paintings));
     } catch (error) {
       valid = false;
     }
   }
+
+  const paintingsClass: PaintingsClass = JSON.parse(JSON.stringify(paintings))
+  // an interface can be made for this instead of any 
+  const paintingsData: any = parsePaintings(paintingsClass);
+  //console.log(paintingsData)
+  console.log(paintingsData['results'])
+
 
   return (
     <div className="h-screen bg-slate-900">
@@ -42,7 +52,16 @@ const Results: NextPage = ({ paintings }: any, { matches }: any,) => {
       {/* Header text */}
       <div className="justify-center text-white text-center">
       <p>Search results:</p>
-      <p>{valid ? JSON.stringify(paintings): "error"}</p>
+      <p>{/* valid ? JSON.stringify(paintings): "error"*/}</p>
+      {paintingsData['results'].map((e: any) => {
+        return (
+          <Artwork
+            image={e['image']}
+            footer1={e['value']}
+            footer2={e['label']}
+          />
+        );
+      })}
       </div>
     </div>
   );

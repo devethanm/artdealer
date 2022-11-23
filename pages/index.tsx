@@ -22,10 +22,16 @@ const Home: NextPage = () => {
   const search = (e: any) => {
     // prevent page refresh upon event (button press)
     e.preventDefault();
-    const term: string = inputRef.current.value;
 
-    // if there is no current search term we return
-    if(!term) return;
+    // var to store the searchTerm within inputRef.current.value
+    let term: string = "";
+
+    // make sure that ref isn't null
+    if(inputRef.current != null) {
+      term = inputRef.current['value'];
+    }
+
+    if(term == null || term == "") return;
 
     // push to results page with user search Term
     router.push(`/results?searchTerm=${term}`)
