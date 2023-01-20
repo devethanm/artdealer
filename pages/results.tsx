@@ -38,30 +38,27 @@ const Results: NextPage<{paintings: Paintings}> = ({ paintings }) => {
   const paintingsClass: PaintingsClass = JSON.parse(JSON.stringify(paintings))
   // an interface can be made for this instead of any 
   const paintingsData: any = parsePaintings(paintingsClass);
-  //console.log(paintingsData)
-  console.log(paintingsData['results'])
-
 
   return (
     <div className="h-screen bg-slate-900">
       <Head>
-        <title>artdealer</title>
+        <title>polyptych</title>
       </Head>
       {/*Place navigation bar at the top of the screen*/}
       <Navbar></Navbar>
       {/* Header text */}
       <div className="justify-center text-white text-center">
-      <p>Search results:</p>
-      <p>{/* valid ? JSON.stringify(paintings): "error"*/}</p>
-      {paintingsData['results'].map((e: any) => {
-        return (
-          <Artwork
-            image={e['image']}
-            footer1={e['value']}
-            footer2={e['label']}
-          />
-        );
-      })}
+        <p>Search results:</p>
+        <p>{/* valid ? JSON.stringify(paintings): "error"*/}</p>
+        {paintingsData['results'].map((e: any) => {
+          return (
+            <Artwork
+              image={e['image']}
+              footer1={e['value']}
+              footer2={e['label']}
+            />
+          );
+        })}
       </div>
     </div>
   );

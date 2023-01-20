@@ -1,6 +1,5 @@
 // Next Components
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router"
 
 // React Components
@@ -40,7 +39,7 @@ const Home: NextPage = () => {
   return (
     <div className="h-screen bg-slate-900">
       <Head>
-        <title>artdealer</title>
+        <title>polyptych</title>
       </Head>
       {/*Place a navigation bar at the top of the screen*/}
       <Navbar></Navbar>
@@ -48,10 +47,8 @@ const Home: NextPage = () => {
       {/* Welcome text */}
       <div className="justify-center text-center flex">
         <h1 className="text-2xl font-bold text-green-700">welcome to&nbsp;</h1>
-        <h1 className="text-center text-2xl font-bold text-red-400 ">art</h1>
-        <h1 className="text-center text-2xl font-bold text-slate-400 ">
-          dealer
-        </h1>
+        <h1 className="text-center text-2xl font-bold text-red-400 ">poly</h1>
+        <h1 className="text-center text-2xl font-bold text-slate-400 ">ptych</h1>
       </div>
 
       {/* Form */}
